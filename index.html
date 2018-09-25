@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>SOAPUI test page</title>
+    <script type='text/javascript' src='https://code.jquery.com/jquery-3.1.1.js'></script>
+    <script type='text/javascript' src='soapui/jquery.soap.js'></script>
+    <script type='text/javascript' src='soapui/vkbeautify.js'></script>
+    <script type='text/javascript' src='soapui/soapui.js'></script>
+    <script type='text/javascript'>
+    $(document).ready(function() {
+      $.soapui($(".soapui"), {
+          url: 'https://se-qa-api.volvocars.biz/wsh/services/RealTime/VINLookup',
+          HTTPHeaders: { "user-key": "0e758d709ac0e5c09bbc97d857bc5303" },
+          enableLogging: true,
+          appendMethodToURL: false
+      });
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="soapui/soapui.css">
+  </head>
+  <body>
+    <h1>SOAP Definition</h1>
+    <div class="soapui">
+      <soap-action></soap-action>
+      <soap-body>
+<!--
+<ns0:VINLookup xmlns:ns0='http://vinlookup.vdw.enterprise.volvocars.net'>
+  <ns0:VIN>YV1AS982181070907</ns0:VIN>
+  <ns0:License_Plate></ns0:License_Plate>
+</ns0:VINLookup>
+-->
+</soap-body>
+    </div>
+  </body>
+</html>
