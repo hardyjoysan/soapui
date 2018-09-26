@@ -95,7 +95,7 @@
     var soapActionNode = $(root_node).find("soap-action").get(0);
     soapActionNode = soapActionNode != null ? $(soapActionNode) : null;
     var soapAction = soapActionNode != null ? soapActionNode.text() : null;
-    var newSoapActionNode = $("<input>", { value: soapAction, type: "text"});
+    var newSoapActionNode = $("<input>", { value: soapAction, type: "text",  class:"form-control", style:'margin-bottom:25px;'});
     if (soapAction != null && soapAction != "") {
       soapActionNode.before("<span>SOAP Action</span>");
       soapActionNode.replaceWith(newSoapActionNode);
@@ -104,6 +104,22 @@
                     .remove();
     }
 
+    // SOAP content type
+    var soapContentTypeNode = $(root_node).find("soap-contenttype").get(0);
+    soapContentTypeNode = soapContentTypeNode != null ? $(soapContentTypeNode) : null;
+    var soapContentType = soapContentTypeNode != null ? soapContentTypeNode.text() : null;
+    var newSoapContentTypeNode = $("<input>", { value: soapContentType, type: "text",  class:"form-control", style:'margin-bottom:25px;'});
+    soapContentTypeNode.before("<span>Content Type</span>");
+    soapContentTypeNode.replaceWith(newSoapContentTypeNode);
+    
+    // SOAP User Key
+    var soapUserKeyNode = $(root_node).find("soap-userkey").get(0);
+    soapUserKeyNode = soapUserKeyNode != null ? $(soapUserKeyNode) : null;
+    var soapUserKey = soapUserKeyNode != null ? soapUserKeyNode.text() : null;
+    var newSoapUserKeyNode = $("<input>", { placeholder: soapUserKey, type: "text",  class:"form-control", style:'margin-bottom:25px;', required: 'required'});
+    soapUserKeyNode.before("<span>User Key</span>");
+    soapUserKeyNode.replaceWith(newSoapUserKeyNode);
+
     var soapBodyNode = root_node.find("soap-body")
                                  .contents()
                                 .filter(function() {
@@ -111,13 +127,13 @@
                                 })
                                 .get(0);
     var soapBody = soapBodyNode != null ? soapBodyNode.data : "";
-    var newSoapBodyNode = $("<textarea>").text(soapBody.trim());
+    var newSoapBodyNode = $("<textarea class='form-control' rows='3' style='width:100%;'>").text(soapBody.trim());
     root_node.find("soap-body")
              .replaceWith(newSoapBodyNode);
     newSoapBodyNode.before("<span>SOAP Body</span>");
 
 
-    var select = $("<select>", { } ).appendTo(root_node);
+    var select = $("<select class='hidden'>", { } ).appendTo(root_node);
     $("<option>", { disabled: true,
                     selected: true,
                     label: "Select an authentication mechanism..." } ).appendTo(select);
@@ -128,7 +144,8 @@
 
     // Then, create the submit button
     var button = $("<input>", { 'type': 'submit',
-                                'value': 'Try it out !'} ).appendTo(root_node);
+                                'value': 'Try it out !',
+                                'class': 'btn btn-primary'} ).appendTo(root_node);
 
     // SOAP Response section
     var response_div = $("<div>", {'class': 'hidden'});
@@ -136,12 +153,12 @@
 
     // SOAP Request
     response_div.append($("<h2>SOAP Request Sent</h2>"));
-    var requestNode = $("<textarea>", { "readonly": true });
+    var requestNode = $("<textarea class='form-control' style='width:100%;'>", { "readonly": true });
     requestNode.appendTo(response_div);
 
     // SOAP Response
     response_div.append($("<h2>SOAP Response Received</h2>"));
-    var responseNode = $("<textarea>", { "readonly": true });
+    var responseNode = $("<textarea class='form-control' style='width:100%;'>", { "readonly": true });
     responseNode.appendTo(response_div);
 
     button.on('click', function (e) {
@@ -152,12 +169,19 @@
       requestNode.empty();
       responseNode.empty();
 
-      // Show the request and response pane
-      response_div.removeClass("hidden");
-
       // Set the SOAPAction
       if (soapAction != null && soapAction != "") {
         soap_options.SOAPAction = newSoapActionNode.val();
+      }
+
+      // Set Content Type
+      if (soapContentType != null && soapContentType != "") {
+        soap_options.HTTPHeaders['Content-Type'] = newSoapContentTypeNode.val();
+      }
+
+      // Set User Key
+      if (soapUserKey != null && soapUserKey != "") {
+        soap_options.HTTPHeaders['user-key'] = newSoapUserKeyNode.val();
       }
 
       // Get the SOAP Body from the HTML form
@@ -197,7 +221,20 @@
           responseNode.text(responseText);
         }
       };
-      $.soap(soap_options);
+
+      if(soap_options.SOAPAction === null || soap_options.SOAPAction == "")  {
+        $("#flashmsg").html('<div class="alert alert-danger">SOAP Action url is required for the request</div>');
+      } else if(soap_options.HTTPHeaders['Content-Type'] === null || soap_options.HTTPHeaders['Content-Type'] == "") {
+        $("#flashmsg").html('<div class="alert alert-danger">Input a valid content type</div>');
+      } else if (soap_options.HTTPHeaders['user-key'] === null || soap_options.HTTPHeaders['user-key'] == "") {
+        $("#flashmsg").html('<div class="alert alert-danger">Please insert user key to continue</div>');
+      } else {
+          soap_options.url = soap_options.SOAPAction;  
+          $.soap(soap_options);
+          // Show the request and response pane
+          response_div.removeClass("hidden");
+      }
+
     });
 
   };

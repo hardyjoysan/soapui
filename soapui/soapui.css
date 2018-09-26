@@ -44,3 +44,41 @@ div.soapui {
   font-weight: bold;
   font-size: 0.9em;
 }
+
+textarea#wsdl_textarea{
+  margin-top:45px;
+  min-height: 780px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: auto;
+  display: block;
+  font-size: .85em;
+  line-height: 1.2em;
+  overflow: auto;
+  height: 200px;
+  background-color: #fcf6db;
+  border: 1px solid #e5e0c6;
+}
+.soapdocmentation .form-control{
+  width: 100% !important;
+}
+.soapdocmentation{
+  max-width: 1280px;
+  margin: 50px auto;
+}
+.soapdocmentation h3{
+  font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+.soapdocmentation h2{
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 50px;
+}
+.soapdocmentation .soapui h2{
+    font-size: 18px;
+    margin-bottom: 10px;
+}
