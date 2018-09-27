@@ -13,7 +13,7 @@
       $(document).ready(function() {
         $.soapui($(".soapui"), {
             url: 'https://se-qa-api.volvocars.biz',
-            HTTPHeaders: { "Content-Type": "application/xml"},
+            HTTPHeaders: { "Content-Type": "text/xml"},
             enableLogging: false,
             appendMethodToURL: false
         });
@@ -58,8 +58,8 @@
                     <div id="flashmsg"></div>
                     <div class="soapui">
                       <soap-action>https://se-qa-api.volvocars.biz/wsh/services/RealTime/VINLookup</soap-action>
-                      <soap-contenttype>application/xml</soap-contenttype>
-                      <soap-userkey>Enter User Key</soap-userkey>
+                      <soap-contenttype></soap-contenttype>
+                      <soap-userkey></soap-userkey>
                       <soap-body>
 <!--
 <ns0:VINLookup xmlns:ns0="http://vinlookup.vdw.enterprise.volvocars.net">

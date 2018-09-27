@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:n="http://vinlookup.vdw.enterprise.volvocars.net" xmlns:infa="http://www.informatica.com/" targetNamespace="http://www.informatica.com/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://vinlookup.vdw.enterprise.volvocars.net" xmlns="http://vinlookup.vdw.enterprise.volvocars.net" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:infatype="http://www.informatica.com/types/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/http/" />
+            <xsd:complexType name="VINStandardFeature">
+                <xsd:sequence>
+                    <xsd:element name="VINStandardFeatureCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="VINStandardFeature" nillable="true" type="xsd:string"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="VINOptionPackages">
+                <xsd:sequence>
+                    <xsd:element name="VINOptionPackage" nillable="true" minOccurs="0" maxOccurs="unbounded" type="VINOptionPackage" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="VINVehicle">
+                <xsd:sequence>
+                    <xsd:element name="VINLookupResp" nillable="true" minOccurs="0" maxOccurs="unbounded" type="VINLookupResp" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="VINLookupResp">
+                <xsd:sequence>
+                    <xsd:element name="VIN" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="MakeId" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="ModelSeriesCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="TypeOrderCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="ModelTypeLevelId" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="TrimlineEdition" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="BodyTypeCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="BodyType" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="NumberOfDoors" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="FuelTypeCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="FuelType" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="EngineCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="EngineCapacity" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="EnginePower" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="GearboxType" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="GearboxCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="TypeofTransmission" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="ProductionDate" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="DeliveryDate" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="ExternalColourCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="ExternalColour" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="ColourType" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="InteriorColourCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="InteriorColour" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="DestinationCountry" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="FYON" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="LicensePlate" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="ChassisNumber" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="SpeedoUnit" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="SalesVersion" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="GearboxNumber" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="SpecialVehicleCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="MarketCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="FactoryCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="SteeringGearProdNumber" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="EnginePartNumber" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="EnginePartSerialNumber" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="GearboxPartNumber" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="GearboxSerialNumber" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="SpecialVehicleDesc" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="Warranty" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="ChassisCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="PlatformtypeCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="PlatformtypeDescription" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="StructureWeek" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="WarrantyCloseDate" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="WarrantyReOpenDate" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="ModelYear" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="EngineDescription" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="SteeringCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="SteeringDescription" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="EngineSerialNoVolvo" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="EngineSerialNoFord" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="VINOptions" nillable="true" minOccurs="0" maxOccurs="1" type="VINOptions" />
+                    <xsd:element name="VINOptionPackages" nillable="true" minOccurs="0" maxOccurs="1" type="VINOptionPackages" />
+                    <xsd:element name="VINStandardFeatures" nillable="true" minOccurs="0" maxOccurs="1" type="VINStandardFeatures" />
+                    <xsd:element name="VINVariantDesignations" nillable="true" minOccurs="0" maxOccurs="1" type="VINVariantDesignations" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="VINOption">
+                <xsd:sequence>
+                    <xsd:element name="VINOptionCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="VINOption" nillable="true" type="xsd:string"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="VINVariantDesignation">
+                <xsd:sequence>
+                    <xsd:element name="VINVariantDesignationCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="VINVariantDesignationDesc" nillable="true" type="xsd:string"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="VINOptionPackage">
+                <xsd:sequence>
+                    <xsd:element name="VINOptionPkgCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="VINOptionPkg" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="VINOptionCode" nillable="true" type="xsd:string"></xsd:element>
+                    <xsd:element name="VINOptionDesc" nillable="true" type="xsd:string"></xsd:element>
+                </xsd:sequence><?xml version="1.0" encoding="utf-8"?>
+
+<wsdl:definitions
+
+ 
+
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+
+  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+
+  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+
+  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+
+  xmlns:n="http://vinlookup.vdw.enterprise.volvocars.net"
+
+  xmlns:infa="http://www.informatica.com/"
+
+  targetNamespace="http://www.informatica.com/"
+
+  xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <wsdl:types>
+
+        <xsd:schema targetNamespace="http://vinlookup.vdw.enterprise.volvocars.net" xmlns="http://vinlookup.vdw.enterprise.volvocars.net" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:infatype="http://www.informatica.com/types/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+            <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/http/"/>
+
+            <xsd:complexType name="VINStandardFeature">
+
+                <xsd:sequence>
+
+                    <xsd:element name="VINStandardFeatureCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="VINStandardFeature" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                </xsd:sequence>
+
+            </xsd:complexType>
+
+            <xsd:complexType name="VINOptionPackages">
+
+                <xsd:sequence>
+
+                    <xsd:element name="VINOptionPackage" nillable="true" minOccurs="0" maxOccurs="unbounded" type="VINOptionPackage"/>
+
+                </xsd:sequence>
+
+            </xsd:complexType>
+
+            <xsd:complexType name="VINVehicle">
+
+                <xsd:sequence>
+
+                    <xsd:element name="VINLookupResp" nillable="true" minOccurs="0" maxOccurs="unbounded" type="VINLookupResp"/>
+
+                </xsd:sequence>
+
+            </xsd:complexType>
+
+            <xsd:complexType name="VINLookupResp">
+
+                <xsd:sequence>
+
+                    <xsd:element name="VIN" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="MakeId" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="ModelSeriesCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="TypeOrderCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="ModelTypeLevelId" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="TrimlineEdition" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="BodyTypeCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="BodyType" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="NumberOfDoors" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="FuelTypeCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="FuelType" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="EngineCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="EngineCapacity" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="EnginePower" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="GearboxType" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="GearboxCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="TypeofTransmission" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="ProductionDate" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="DeliveryDate" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="ExternalColourCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="ExternalColour" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="ColourType" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="InteriorColourCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="InteriorColour" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="DestinationCountry" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="FYON" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="LicensePlate" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="ChassisNumber" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="SpeedoUnit" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="SalesVersion" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="GearboxNumber" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="SpecialVehicleCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="MarketCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="FactoryCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="SteeringGearProdNumber" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="EnginePartNumber" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="EnginePartSerialNumber" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="GearboxPartNumber" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="GearboxSerialNumber" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="SpecialVehicleDesc" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="Warranty" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="ChassisCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="PlatformtypeCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="PlatformtypeDescription" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="StructureWeek" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="WarrantyCloseDate" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="WarrantyReOpenDate" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="ModelYear" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="EngineDescription" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="SteeringCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="SteeringDescription" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="EngineSerialNoVolvo" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="EngineSerialNoFord" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="VINOptions" nillable="true" minOccurs="0" maxOccurs="1" type="VINOptions"/>
+
+                    <xsd:element name="VINOptionPackages" nillable="true" minOccurs="0" maxOccurs="1" type="VINOptionPackages"/>
+
+                    <xsd:element name="VINStandardFeatures" nillable="true" minOccurs="0" maxOccurs="1" type="VINStandardFeatures"/>
+
+                    <xsd:element name="VINVariantDesignations" nillable="true" minOccurs="0" maxOccurs="1" type="VINVariantDesignations"/>
+
+                </xsd:sequence>
+
+            </xsd:complexType>
+
+            <xsd:complexType name="VINOption">
+
+                <xsd:sequence>
+
+                    <xsd:element name="VINOptionCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="VINOption" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                </xsd:sequence>
+
+            </xsd:complexType>
+
+            <xsd:complexType name="VINVariantDesignation">
+
+                <xsd:sequence>
+
+                    <xsd:element name="VINVariantDesignationCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="VINVariantDesignationDesc" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                </xsd:sequence>
+
+            </xsd:complexType>
+
+            <xsd:complexType name="VINOptionPackage">
+
+                <xsd:sequence>
+
+                    <xsd:element name="VINOptionPkgCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="VINOptionPkg" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="VINOptionCode" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                    <xsd:element name="VINOptionDesc" nillable="true" type="xsd:string">
+
+        </xsd:element>
+
+                </xsd:sequence>
+
+            </xsd:complexType>
+
+            <xsd:complexType name="VINStandardFeatures">
+
+                <xsd:sequence>
+
+                    <xsd:element name="VINStandardFeature" nillable="true" minOccurs="0" maxOccurs="unbounded" type="VINStandardFeature"/>
+
+                </xsd:sequence>
+
+            </xsd:complexType>
+
+            <xsd:complexType name="VINOptions">
+
+                <xsd:sequence>
+
+                    <xsd:element name="VINOption" nillable="true" minOccurs="0" maxOccurs="unbounded" type="VINOption"/>
+
+                </xsd:sequence>
+
+            </xsd:complexType>
+
+            <xsd:complexType name="VINVariantDesignations">
+
+                <xsd:sequence>
+
+                    <xsd:element name="VINVariantDesignation" nillable="true" minOccurs="0" maxOccurs="unbounded" type="VINVariantDesignation"/>
+
+                </xsd:sequence>
+
+            </xsd:complexType>
+
+            <xsd:element name="VINOptionPackages" type="VINOptionPackages"/>
+
+            <xsd:element name="VINVariantDesignations" type="VINVariantDesignations"/>
+
+            <xsd:element name="VINStandardFeatures" type="VINStandardFeatures"/>
+
+            <xsd:element name="VINLookup">
+
+                <xsd:complexType>
+
+                    <xsd:sequence>
+
+                        <xsd:element name="VIN" nillable="true" minOccurs="0" maxOccurs="1" type="xsd:string">
+
+          </xsd:element>
+
+                        <xsd:element name="License_Plate" nillable="true" minOccurs="0" maxOccurs="1" type="xsd:string">
+
+          </xsd:element>
+
+                    </xsd:sequence>
+
+               </xsd:complexType>
+
+            </xsd:element>
+
+            <xsd:element name="VINOptions" type="VINOptions"/>
+
+            <xsd:element name="VINVehicle" type="VINVehicle"/>
+
+        </xsd:schema>
+
+    </wsdl:types>
+
+    <wsdl:message name="VINLookupRequest">
+
+        <wsdl:part name="parameters" element="n:VINLookup" />
+
+    </wsdl:message>
+
+    <wsdl:message name="VINLookupResponse">
+
+        <wsdl:part name="parameters" element="n:VINVehicle" />
+
+    </wsdl:message>
+
+    <wsdl:portType name="VINLookupPort">
+
+        <wsdl:operation name="VINLookupOperation">
+
+            <wsdl:input message="infa:VINLookupRequest"/>
+
+            <wsdl:output message="infa:VINLookupResponse"/>
+
+        </wsdl:operation>
+
+    </wsdl:portType>
+
+    <wsdl:binding name="VINLookupBinding" type="infa:VINLookupPort">
+
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+
+        <wsdl:operation name="VINLookupOperation">
+
+            <soap:operation soapAction="" style="document" />
+
+            <wsdl:input>
+
+                <soap:body  use="literal" />
+
+            </wsdl:input>
+
+            <wsdl:output>
+
+                <soap:body  use="literal" />
+
+            </wsdl:output>
+
+        </wsdl:operation>
+
+    </wsdl:binding>
+
+    <wsdl:service name="VINLookup">
+
+        <wsdl:port name="VINLookupPort" binding="infa:VINLookupBinding">
+
+            <soap:address location="http://gotsvw3460:7333/wsh/services/RealTime/VINLookup" />
+
+        </wsdl:port>
+
+    </wsdl:service>
+
+</wsdl:definitions>
+            </xsd:complexType>
+            <xsd:complexType name="VINStandardFeatures">
+                <xsd:sequence>
+                    <xsd:element name="VINStandardFeature" nillable="true" minOccurs="0" maxOccurs="unbounded" type="VINStandardFeature" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="VINOptions">
+                <xsd:sequence>
+                    <xsd:element name="VINOption" nillable="true" minOccurs="0" maxOccurs="unbounded" type="VINOption" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="VINVariantDesignations">
+                <xsd:sequence>
+                    <xsd:element name="VINVariantDesignation" nillable="true" minOccurs="0" maxOccurs="unbounded" type="VINVariantDesignation" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="VINOptionPackages" type="VINOptionPackages" />
+            <xsd:element name="VINVariantDesignations" type="VINVariantDesignations" />
+            <xsd:element name="VINStandardFeatures" type="VINStandardFeatures" />
+            <xsd:element name="VINLookup">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="VIN" nillable="true" minOccurs="0" maxOccurs="1" type="xsd:string"></xsd:element>
+                        <xsd:element name="License_Plate" nillable="true" minOccurs="0" maxOccurs="1" type="xsd:string"></xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="VINOptions" type="VINOptions" />
+            <xsd:element name="VINVehicle" type="VINVehicle" />
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="VINLookupRequest">
+        <wsdl:part name="parameters" element="n:VINLookup" />
+    </wsdl:message>
+    <wsdl:message name="VINLookupResponse">
+        <wsdl:part name="parameters" element="n:VINVehicle" />
+    </wsdl:message>
+    <wsdl:portType name="VINLookupPort">
+        <wsdl:operation name="VINLookupOperation">
+            <wsdl:input message="infa:VINLookupRequest" />
+            <wsdl:output message="infa:VINLookupResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="VINLookupBinding" type="infa:VINLookupPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="VINLookupOperation">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="VINLookup">
+        <wsdl:port name="VINLookupPort" binding="infa:VINLookupBinding">
+            <soap:address location="http://gotsvw3460:7333/wsh/services/RealTime/VINLookup" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

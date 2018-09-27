@@ -100,8 +100,7 @@
       soapActionNode.before("<span>SOAP Action</span>");
       soapActionNode.replaceWith(newSoapActionNode);
     } else {
-      soapActionNode.find("soap-action")
-                    .remove();
+      soapActionNode.find("soap-action").remove();
     }
 
     // SOAP content type
@@ -109,16 +108,24 @@
     soapContentTypeNode = soapContentTypeNode != null ? $(soapContentTypeNode) : null;
     var soapContentType = soapContentTypeNode != null ? soapContentTypeNode.text() : null;
     var newSoapContentTypeNode = $("<input>", { value: soapContentType, type: "text",  class:"form-control", style:'margin-bottom:25px;'});
-    soapContentTypeNode.before("<span>Content Type</span>");
-    soapContentTypeNode.replaceWith(newSoapContentTypeNode);
+    if (soapContentType != null && soapContentType != "") {
+      soapContentTypeNode.before("<span>Content Type</span>");
+      soapContentTypeNode.replaceWith(newSoapContentTypeNode);
+    }else{
+      soapContentTypeNode.find("soap-contenttype").remove();
+    }
     
     // SOAP User Key
     var soapUserKeyNode = $(root_node).find("soap-userkey").get(0);
     soapUserKeyNode = soapUserKeyNode != null ? $(soapUserKeyNode) : null;
     var soapUserKey = soapUserKeyNode != null ? soapUserKeyNode.text() : null;
-    var newSoapUserKeyNode = $("<input>", { placeholder: soapUserKey, type: "text",  class:"form-control", style:'margin-bottom:25px;', required: 'required'});
-    soapUserKeyNode.before("<span>User Key</span>");
-    soapUserKeyNode.replaceWith(newSoapUserKeyNode);
+    var newSoapUserKeyNode = $("<input>", { placeholder: "Enter User Key", type: "text",  class:"form-control", style:'margin-bottom:25px;', required: 'required'});
+    if (soapUserKey != null && soapUserKey != "") {
+      soapUserKeyNode.before("<span>User Key</span>");
+      soapUserKeyNode.replaceWith(newSoapUserKeyNode);
+    }else{
+      soapUserKeyNode.find("soap-userkey").remove();
+    }
 
     var soapBodyNode = root_node.find("soap-body")
                                  .contents()
