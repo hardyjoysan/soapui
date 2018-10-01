@@ -3,7 +3,7 @@
 ini_set("soap.wsdl_cache_enabled","0");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods GET,POST,PUT,DELETE,OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Allow-Headers: SOAPAction, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 // model, which uses in web service functions as parameter
 class Book
