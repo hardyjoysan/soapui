@@ -1,0 +1,41 @@
+<html>
+ <head>
+    <title>Mailchimp from jQuery</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function soapAjaxCall(){
+            //var soapAction = "https://bnbank-applps.knowit.live/PartnerServicesBridge/Centum/UnsecuredLoan.svc";
+            //var soapRequestBody = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:know="http://knowit.applikator.partnerservices.bridge" xmlns:know1="http://schemas.datacontract.org/2004/07/Knowit.Applikator.PartnerServices.Bridge.Requests" xmlns:know2="http://schemas.datacontract.org/2004/07/Knowit.Applikator.PartnerServices.Bridge.Requests.Credentials"> <soapenv:Header/> <soapenv:Body> <know:Get> <!--Optional:--> <know:request> <!--Optional:--> <know1:Credentials> <!--Optional:--> <know2:Password>WrezasTaKebUyAcr2Wru7t55</know2:Password> <!--Optional:--> <know2:Username>psbtest-centum</know2:Username> </know1:Credentials> <!--Optional:--> <know1:Guid>00000000-0000-0000-0000-000000000000</know1:Guid> </know:request> </know:Get> </soapenv:Body> </soapenv:Envelope>';
+
+            var soapUrl = $("#txtUrl").val();
+
+            $.ajax({
+                url: soapUrl+'&c=?',
+                type: "GET",
+                //data: soapRequestBody,
+                contentType: "application/json",
+                dataType: 'jsonp',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("application/json", "Authorization", "Basic " + btoa('user:76ca45ef689793abf5dcff360bc7a40c-us19'))
+                },
+                success: function(response) {
+                    console.log("success", response);
+                    //$("#response").html('<pre>'+$.parseXML( response )+'</pre>');
+
+                },
+                error: function(err) {
+                    console.log("error", err)
+                }
+            });
+        }
+        
+    </script>
+</head>
+<body>
+    <h3>Calling Web Services with jQuery/AJAX</h3>
+    Enter your WSDL url:
+    <input id="txtUrl" type="text" />
+    <input value="Call web service" type="button" onclick="soapAjaxCall()" />
+    <div id="response"> </div>
+</body>
+</html>
