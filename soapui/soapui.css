@@ -12,17 +12,17 @@
   font-size: .85em;
   line-height: 1.2em;
   overflow: auto;
-  height: 200px;
-  background-color: #fcf6db;
-  border: 1px solid #e5e0c6;
+  min-height: 200px;
+  background-color: #fff;
+  border: 1px solid #b5d4ec;
 }
 
 .soapui input[type=text] {
   width: 80%;
   display: block;
   font-size: .85em;
-  background-color: #fcf6db;
-  border: 1px solid #e5e0c6;
+  background-color: #fff;
+  border: 1px solid #b5d4ec;
 }
 
 .soapui select {
@@ -46,7 +46,6 @@ div.soapui {
 }
 
 textarea#wsdl_textarea{
-  margin-top:45px;
   min-height: 780px;
   max-width: 100%;
   white-space: nowrap;
@@ -56,29 +55,67 @@ textarea#wsdl_textarea{
   line-height: 1.2em;
   overflow: auto;
   height: 200px;
-  background-color: #fcf6db;
-  border: 1px solid #e5e0c6;
+  background-color: #fff;
+  border: 1px solid #b5d4ec;
+}
+#soapResponse{
+  display: none;
 }
 .soapdocmentation .form-control{
   width: 100% !important;
 }
-.soapdocmentation{
-  max-width: 1280px;
-  margin: 50px auto;
+.soapdocmentation .panel-default>.panel-heading{
+  padding: 0;
 }
-.soapdocmentation h3{
-  font-size: 25px;
-    font-weight: 600;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 20px;
+.soapdocmentation .panel-default>.panel-heading a{
+  padding: 5px 20px;
+  display: block;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  border-radius: 5px;
+  background-color: #e7f0f7;
+  border: 1px solid #c3d9ec;
+  color: #003057;
 }
-.soapdocmentation h2{
-    font-size: 32px;
-    font-weight: 900;
-    margin-bottom: 50px;
+.soapdocmentation .panel-default>.panel-heading+.panel-collapse>.panel-body{
+  border: 0;
 }
-.soapdocmentation .soapui h2{
-    font-size: 18px;
-    margin-bottom: 10px;
+
+/* Loader */
+.lds-facebook {
+  display: none;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 6px;
+  width: 13px;
+  background: #000;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 6px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 26px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 45px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 6px;
+    height: 51px;
+  }
+  50%, 100% {
+    top: 19px;
+    height: 26px;
+  }
 }

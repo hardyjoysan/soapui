@@ -4,20 +4,12 @@
     <meta charset="UTF-8">
     <title>SOAPUI test page</title>
     <script type='text/javascript' src='https://code.jquery.com/jquery-3.1.1.js'></script>
-    <script type='text/javascript' src='soapui/jquery.soap.js'></script>
     <script type='text/javascript' src='soapui/vkbeautify.js'></script>
-    <script type='text/javascript' src='soapui/soapui.js'></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="soapui/soapui.css">
     <script type='text/javascript'>
       $(document).ready(function() {
-        $.soapui($(".soapui"), {
-            url: 'https://se-qa-api.volvocars.biz',
-            HTTPHeaders: { "Content-Type": "text/xml"},
-            enableLogging: false,
-            appendMethodToURL: false
-        });
-
         var vkbeautify = window.vkbeautify;
         if (vkbeautify == null) {
           console.log("vkbeautify not loaded, using a poor replacement for XML Pretty Printing");
@@ -26,7 +18,6 @@
             return xml.replace(/(>)|([^>])(?=<)/g, "$1$2\n");
           } }
         }
-
         var xml = new XMLHttpRequest();
         xml.open('GET', 'soapui/wsdl.xml', false);
         xml.send();
@@ -34,9 +25,72 @@
 
         document.getElementById("wsdl_textarea").innerHTML = vkbeautify.xml(xmldata.toString(), 2);
 
+
+        var jsonUrl = 'VDW-QA-SOAP.json';
+    
+        $.getJSON(jsonUrl, function(data){
+          var soapHtml = '<div class="form-group"><label>Method</label><select class="form-control" name="soapMethod"><option>POST</option><option>GET</option></select></div>';
+          $.each(data, function(key,val){
+            if(key == "action"){
+              soapHtml += '<div class="form-group"><label>URL</label><input type="text" class="form-control" name="soapUrl" value="'+val+'"></div>';
+            }else if(key == "contenttype"){
+              soapHtml += '<div class="form-group"><label>Content-Type</label><input type="text" class="form-control" name="soapContentType" value="'+val+'"></div>';
+            }else if(key == "accept"){
+              soapHtml += '<div class="form-group"><label>Accept</label><input type="text" class="form-control" name="soapAccept" value="'+val+'"></div>';
+            }else if(key == "userkey"){
+              soapHtml += '<div class="form-group"><label>User Key</label><input type="text" class="form-control" name="soapUserkey" placeholder="Enter User Key" value="'+val+'"></div>';
+            }else if(key == "userid"){
+              soapHtml += '<div class="form-group"><label>User ID</label><input type="text" class="form-control" name="soapUserid" value="'+val+'"></div>';
+            }else if(key == "userpass"){
+              soapHtml += '<div class="form-group"><label>User Pass</label><input type="text" class="form-control" name="soapUserpass" value="'+val+'"></div>';
+            }else if(key == "body"){
+              var body = val.replace(/'/g, '"');
+              soapHtml += '<div class="form-group"><label>SOAP Body</label><textarea class="form-control" name="soapBody" placeholder="SOAP Body" rows="10">'+vkbeautify.xml(body)+'</textarea></div>';
+            }
+          });
+          soapHtml += '<button type="submit" class="btn btn-default">Submit</button>';
+          $("#soapAjaxForm").html(soapHtml);
+        });
+
+        function ajaxLoaded(response) {
+          console.log("success", response)
+          if (window.ActiveXObject){
+              xmlString = response.xml;
+          }else{
+              xmlString = (new XMLSerializer()).serializeToString(response);
+          }
+
+          var responseText = vkbeautify.xml(xmlString);
+          $("#soapResutText").text(responseText);
+          $("#soapResponse").slideDown();
+          $("#soapLoader").hide();
+        }
+        
+        $("#soapAjaxForm").on('submit', function(e) {
+          e.preventDefault();
+          var data = $(this).serialize();
+          $("#soapResponse").slideUp();
+          $("#soapResutText").text("");
+          $("#soapLoader").show();
+          $('#soapError').html("");
+
+          $.ajax({
+              url: "http://172.16.16.234/~rdtest/curl.php",
+              type: "POST",
+              data: data,
+              success: function(response) {
+                $(document).ajaxStop(function() {
+                  setTimeout( function() { ajaxLoaded(response) }, 10000 );
+                });
+              },
+              error: function(err) {
+                $('#soapError').html('<p class="bg-danger">Error! Please validate data submited.</p>');
+                console.log("error", err)
+              }
+          });
+        });
       });
     </script>
-    <link rel="stylesheet" type="text/css" href="soapui/soapui.css">
   </head>
   <body>
       <div class="container">
@@ -55,20 +109,16 @@
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                   <div class="panel-body">
-                    <div id="flashmsg"></div>
-                    <div class="soapui">
-                      <soap-action>http://172.16.16.234/~rdtest/server.php</soap-action>
-                      <soap-contenttype></soap-contenttype>
-                      <soap-userkey></soap-userkey>
-                      <soap-body>
-<!--
-<ns0:VINLookup xmlns:ns0="http://vinlookup.vdw.enterprise.volvocars.net">
-    <ns0:VIN>YV1AS982181070907</ns0:VIN>
-    <ns0:License_Plate></ns0:License_Plate>
-</ns0:VINLookup>
--->
-                      </soap-body>
-                    </div>
+                      <div class="soapui">
+                          <div id="#soapError"></div>
+                          <form id="soapAjaxForm"></form>
+                          <div class="lds-facebook" id="soapLoader"><div></div><div></div><div></div></div>
+                          <div id="soapResponse">
+                            <h2>SOAP Response</h2>
+                            <textarea id="soapResutText" class="form-control" rows="25"></textarea>
+                          </div>
+                      </div>
+                      
                   </div>
                 </div>
               </div>

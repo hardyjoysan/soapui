@@ -1,54 +1,63 @@
-<?php 
-    $soapUrl = "https://se-qa-api.volvocars.biz/wsh/services/RealTime/VINLookup";
+<?php
+header('Content-type: application/xml');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: SOAPAction, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+if (isset($_POST)) {
+
+    $soapUrl = $_POST['soapUrl'];
+    $soapMethod = $_POST['soapMethod'];
+    $soapBody = $_POST['soapBody'];
+
+    if (empty($soapUrl) || empty($soapMethod) || empty($soapBody)) {
+        $errorXml = '<error>Please check required fields before submiting!</error>';
+        print($errorXml);
+    }
+
+    $headers = array();
+
+    foreach ($_POST as $key => $value) {
+        if($key == "soapContentType"){
+            $headers[] = "Content-type: $value";
+        }elseif($key == "soapAccept"){
+            $headers[] = "Accept: $value";
+        }elseif($key == "soapUserkey"){
+            $headers[] = "user-key: $value";
+        }elseif($key == "soapUrl"){
+            $headers[] = "SOAPAction: $value";
+        }
+    }
+
 
     // xml post structure
-    $xml_post_string = '<?xml version="1.0" encoding="UTF-8"?>
-                        <soap:Envelope
-                        xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                        xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-                        <soap:Body>
-                            <ns0:VINLookup
-                            xmlns:ns0="http://vinlookup.vdw.enterprise.volvocars.net">
-                            <ns0:VIN>YV1AS982181070907</ns0:VIN>
-                            <ns0:License_Plate></ns0:License_Plate>
-                            </ns0:VINLookup>
-                        </soap:Body>
-                        </soap:Envelope>';
+    $xml_post_string = $soapBody;
 
-    $headers = array(
-                "Content-type: application/xml;charset=\"utf-8\"",
-                "Accept: application/xml",
-                "Cache-Control: no-cache",
-                "Pragma: no-cache",
-                "SOAPAction: $soapUrl",
-                "user-key: 354426404da2912ae76500f02a8ab026",
-                "Content-length: ".strlen($xml_post_string),
-            );
-
-    $url = $soapUrl;
-    // PHP cURL  for https connection with auth
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_URL, $soapUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $xml_post_string); // the SOAP request
+
+    if ($_POST['soapUserid'] && $_POST['soapUserpass']) {
+        $headers[] = 'Authorization: Basic '. base64_encode($_POST['soapUserid'] . ":" . $_POST['soapUserpass']);
+    }
+
+    if ($soapMethod == "POST") {
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml_post_string); // the SOAP request
+    }elseif($soapMethod == "GET"){
+        curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'GET');
+    }
+    
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     // converting
     $response = curl_exec($ch); 
     curl_close($ch);
 
-    // converting
-    //$response1 = str_replace("<soap:Body>","",$response);
-    //$response2 = str_replace("</soap:Body>","",$response1);
+    print($response);
+}
 
-    // convertingc to XML
-    $parser = simplexml_load_string($response);
-    // user $parser to get your data out of XML response and to display it.
-
-    echo '<textarea rows="10">='.$response.'</textarea>';
 ?>

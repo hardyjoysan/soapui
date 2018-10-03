@@ -13,12 +13,21 @@
                 url: soapUrl,
                 type: "GET",
                 //data: soapRequestBody,
-                contentType: "text/xml",
+                contentType: "application/xml",
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("Content-Type", "text/xml")
                 },
                 success: function(response) {
-                    console.log("success", response);
+
+                    if (window.ActiveXObject){
+                        xmlString = response.xml;
+                    }
+                    // code for Mozilla, Firefox, Opera, etc.
+                    else{
+                        xmlString = (new XMLSerializer()).serializeToString(response);
+                    }
+                    console.log("success", xmlString);
+                    $("#aaaaaaaaa").val(xmlString);
                     //$("#response").html('<pre>'+$.parseXML( response )+'</pre>');
 
                 },
@@ -35,6 +44,7 @@
     Enter your WSDL url:
     <input id="txtUrl" type="text" />
     <input value="Call web service" type="button" onclick="soapAjaxCall()" />
+    <textarea name="" id="aaaaaaaaa" cols="100" rows="50"></textarea>
     <div id="response"> </div>
 </body>
 </html>
