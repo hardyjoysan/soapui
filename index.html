@@ -75,17 +75,16 @@
           $('#soapError').html("");
 
           $.ajax({
-              url: "http://172.16.16.234/~rdtest/curl.php",
+              url: "http://entiros.test//external/soapcurl.php",
               type: "POST",
               data: data,
               success: function(response) {
-                $(document).ajaxStop(function() {
-                  setTimeout( function() { ajaxLoaded(response) }, 10000 );
-                });
+                ajaxLoaded(response);
               },
               error: function(err) {
-                $('#soapError').html('<p class="bg-danger">Error! Please validate data submited.</p>');
-                console.log("error", err)
+                $('#soapError').html('<div class="alert alert-danger" role="alert">Error! Please check your inputs and try again later.</div>');
+                console.log("error", err.responseText);
+                $("#soapLoader").hide();
               }
           });
         });
@@ -110,7 +109,7 @@
                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                   <div class="panel-body">
                       <div class="soapui">
-                          <div id="#soapError"></div>
+                          <div id="soapError"></div>
                           <form id="soapAjaxForm"></form>
                           <div class="lds-facebook" id="soapLoader"><div></div><div></div><div></div></div>
                           <div id="soapResponse">
